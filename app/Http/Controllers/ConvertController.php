@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Convert;
 use App\ConvertOption;
 use App\Enums\ConvertStatus;
+use App\Jobs\ConvertToNightcore;
 use FFMpeg\Format\Audio\Mp3;
 use Illuminate\Http\Request;
 
@@ -54,21 +55,7 @@ class ConvertController extends Controller
         // store audio to temp folder
         $source->storeAs('temp', $convert->file_name);
         // start convert progress
-        \FFMpeg::open('temp/' . $convert->file_name)
-            ->addFilter(
-                '-af',
-                implode(',', [
-                    // set rubberband
-                    'rubberband=tempo=' . $convert->getOption('tempo') . ':pitch=' . $convert->getOption('pitch'),
-                    // set volume
-                    'volume=' . $convert->getOption('volume')
-                ])
-            )
-            // export result
-            ->export()
-            ->toDisk('public')
-            ->informat(new Mp3())
-            ->save('converts/' . $convert->file_name);
+        ConvertToNightcore::dispatch($convert);
         // back to submit page
         return back();
     }
