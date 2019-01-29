@@ -8,6 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }}</title>
+    <meta name="description" content="Nightcore the song!">
+    <meta name="Keywords" content="nightcore,eveningcore,nightcore maker,nightcore converter">
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
@@ -17,7 +19,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-light navbar-laravel">
+    <nav class="navbar navbar-expand navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 {{ config('app.name') }}
