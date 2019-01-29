@@ -22,6 +22,13 @@
             <a class="navbar-brand" href="{{ route('home') }}">
                 {{ config('app.name') }}
             </a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://github.com/mikeyzm/eveningcore" target="_blank">
+                        GitHub
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 
