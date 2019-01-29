@@ -13,4 +13,4 @@
 
 Route::get('/', 'ConvertController@index')->name('home');
 
-Route::resource('converts', 'ConvertController');
+Route::resource('converts', 'ConvertController')->only('store');
