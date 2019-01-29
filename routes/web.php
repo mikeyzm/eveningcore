@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', 'ConvertController@index')->name('home');
+
+Route::resource('converts', 'ConvertController');
