@@ -12,6 +12,7 @@
         "bensampo/laravel-enum": "^1.16",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
+        "laravel/horizon": "^2.0",
         "laravel/tinker": "^1.0",
         "pbmedia/laravel-ffmpeg": "^3.0"
     },
