@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Convert;
 use App\ConvertOption;
 use App\Enums\ConvertStatus;
+use App\Http\Requests\ConvertRequest;
 use App\Jobs\ConvertToNightcore;
 use FFMpeg\Format\Audio\Mp3;
 use Illuminate\Http\Request;
@@ -32,13 +33,7 @@ class ConvertController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ConvertRequest $request)
     {
         $source = $request->file('source');
         // create covnert record

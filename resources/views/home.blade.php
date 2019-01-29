@@ -2,6 +2,16 @@
 
 @section('content')
     <div class="container">
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <converter placeholder="{{ __('Choose file') }}" inline-template>
             <form method="post" action="{{ route('converts.store') }}" class="card mb-5" enctype="multipart/form-data">
                 @csrf
