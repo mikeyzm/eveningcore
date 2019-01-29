@@ -19,3 +19,6 @@ _ide_helper_models.php
 /public/css
 /public/js
 /public/mix-manifest.json
+
+laravel-echo-server.json
+laravel-echo-server.lock

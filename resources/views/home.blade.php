@@ -42,8 +42,52 @@
             </form>
         </converter>
 
-        @foreach($converts as $convert)
-            <audio class="w-100 mt-4" controls src="{{ $convert->url }}"></audio>
-        @endforeach
+        @if($converts)
+            <h2 class="h5 mb-4">Last 10 converted files</h2>
+            @foreach($converts as $convert)
+                <convert :_convert="{{ $convert->toJson() }}" inline-template>
+                    <div class="card mb-3" v-if="!removed">
+                        <div class="card-header">
+                            <h2 class="original-name">{{ $convert->original_name }}</h2>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item between-box">
+                                Status
+                                <span :class="['badge', statusClass]" v-text="convert.status_desc"></span>
+                            </div>
+                            <div class="list-group-item between-box" v-if="convert.expired_at">
+                                {{ __('Expired at') }}
+                                <time class="badge badge-light" v-text="convert.expired_at"></time>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-monospace">
+                                <h3 class="h6 mb-3">Convert options</h3>
+                                @foreach($convert->options as $option)
+                                    <p class="mb-1">
+                                        {{ __(title_case($option->name)) }}:
+                                        @switch($option->name)
+                                            @case('tempo')
+                                            @case('pitch')
+                                            @case('volume')
+                                            x{{ $option->value }}
+                                            @break
+                                            @default
+                                            {{ $option->value }}
+                                        @endswitch
+                                    </p>
+                                @endforeach
+                            </div>
+                            <audio class="w-100 mt-4" controls :src="convert.url" v-if="convert.status === 2"></audio>
+                        </div>
+                        <div class="card-footer">
+                            <a :href="convert.url" :download="convert.name" :class="['btn', 'btn-primary', {disabled: convert.status !== 2}]">
+                                {{ __('Download') }}
+                            </a>
+                        </div>
+                    </div>
+                </convert>
+            @endforeach
+        @endif
     </div>
 @endsection

@@ -18,7 +18,7 @@ class ConvertController extends Controller
      */
     public function index()
     {
-        $converts = Convert::latest()->take(5)->get();
+        $converts = Convert::latest()->take(10)->get();
         return view('home', compact('converts'));
     }
 

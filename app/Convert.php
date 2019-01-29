@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Enums\ConvertStatus;
+use App\Events\ConvertStatusUpdated;
 use Illuminate\Database\Eloquent\Model;
 
 class Convert extends Model
@@ -11,6 +13,19 @@ class Convert extends Model
     protected $dates = ['expired_at'];
 
     protected $with = ['options'];
+
+    protected $appends = ['url', 'status_desc'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saved(function (Convert $convert) {
+            if ($convert->isDirty('status')) {
+                event(new ConvertStatusUpdated($convert));
+            }
+        });
+    }
 
     function options()
     {
@@ -25,5 +40,10 @@ class Convert extends Model
     function getUrlAttribute()
     {
         return \Storage::disk('public')->url('converts/' . $this->file_name);
+    }
+
+    function getStatusDescAttribute()
+    {
+        return ConvertStatus::getDescription($this->status);
     }
 }
