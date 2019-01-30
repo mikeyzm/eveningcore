@@ -4,6 +4,7 @@ namespace App;
 
 use App\Enums\ConvertStatus;
 use App\Events\ConvertStatusUpdated;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Convert extends Model
@@ -45,5 +46,10 @@ class Convert extends Model
     function getStatusDescAttribute()
     {
         return ConvertStatus::getDescription($this->status);
+    }
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('c');
     }
 }

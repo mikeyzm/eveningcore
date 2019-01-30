@@ -36,3 +36,8 @@ window.Echo = new Echo({
     broadcaster: 'socket.io',
     host: window.location.hostname + ':8443'
 });
+
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);

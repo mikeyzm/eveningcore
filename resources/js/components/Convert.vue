@@ -1,4 +1,6 @@
 <script>
+    import dayjs from 'dayjs';
+
     export default {
         data() {
             return {
@@ -28,9 +30,12 @@
             }
         },
         watch: {
-            convert(n) {
-                if (![0, 1].includes(n.status)) {
+            convert(newConvertObj) {
+                if (![0, 1].includes(newConvertObj.status)) {
                     window.Echo.leave(this.channel);
+                }
+                if (newConvertObj.expired_at) {
+                    this.$refs.expiredAt.textContent = dayjs(newConvertObj.expired_at).fromNow();
                 }
             },
         },
@@ -40,6 +45,9 @@
                     .listen('ConvertStatusUpdated', (data) => {
                         this.convert = data.convert;
                     });
+            }
+            if (this.convert.expired_at) {
+                this.$refs.expiredAt.textContent = dayjs(this.convert.expired_at).fromNow();
             }
         }
     }
