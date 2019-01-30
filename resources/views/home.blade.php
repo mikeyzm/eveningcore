@@ -72,7 +72,7 @@
                         </div>
                         <div class="card-body">
                             <div class="text-monospace">
-                                <h3 class="h6 mb-3">Convert options</h3>
+                                <h3 class="h5 mb-3">Convert options</h3>
                                 @foreach($convert->options as $option)
                                     <p class="mb-1">
                                         {{ __(title_case($option->name)) }}:
@@ -91,7 +91,7 @@
                             <audio class="w-100 mt-4" controls :src="convert.url" v-if="convert.status === 2"></audio>
                         </div>
                         <div class="card-footer">
-                            <a :href="convert.url" :download="convert.name" :class="['btn', 'btn-primary', {disabled: convert.status !== 2}]">
+                            <a :href="convert.url" :download="convert.original_name" :class="['btn', 'btn-primary', {disabled: convert.status !== 2}]">
                                 {{ __('Download') }}
                             </a>
                         </div>
