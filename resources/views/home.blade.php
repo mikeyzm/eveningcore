@@ -67,7 +67,7 @@
                             </div>
                             <div class="list-group-item between-box" v-if="convert.expired_at">
                                 {{ __('Expired at') }}
-                                <time class="badge badge-light" v-text="convert.expired_at" ref="expiredAt"></time>
+                                <time class="badge badge-light" v-text="expiredAt"></time>
                             </div>
                         </div>
                         <div class="card-body">

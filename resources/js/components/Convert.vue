@@ -8,6 +8,7 @@
                 channel: 'convert.' + this._convert.id,
                 removing: false,
                 removed: false,
+                expiredAt: this._convert.expired_at,
             }
         },
         props: [
@@ -35,19 +36,19 @@
                     window.Echo.leave(this.channel);
                 }
                 if (newConvertObj.expired_at) {
-                    this.$refs.expiredAt.textContent = dayjs(newConvertObj.expired_at).fromNow();
+                    this.expiredAt = dayjs(newConvertObj.expired_at).fromNow();
                 }
             },
         },
         mounted() {
+            if (this.expiredAt) {
+                this.expiredAt = dayjs(this.expiredAt).fromNow();
+            }
             if ([0, 1].includes(this.convert.status)) {
                 window.Echo.channel(this.channel)
                     .listen('ConvertStatusUpdated', (data) => {
                         this.convert = data.convert;
                     });
-            }
-            if (this.convert.expired_at) {
-                this.$refs.expiredAt.textContent = dayjs(this.convert.expired_at).fromNow();
             }
         }
     }
