@@ -17,7 +17,7 @@
                 @csrf
                 <div class="card-header">{{ __('New Convert') }}</div>
                 <div class="card-body">
-                    <div class="form-group">
+                    <div class="form-group mb-4">
                         <label for="source">{{ __('Source Audio') }}</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="source" name="source" @change="onFileChange">
@@ -53,7 +53,7 @@
         </converter>
 
         @if($converts)
-            <h2 class="h5 mb-4">Last 10 converted files</h2>
+            <h2 class="h5 mb-4">Last 10 converted audios</h2>
             @foreach($converts as $convert)
                 <convert :_convert="{{ $convert->toJson() }}" inline-template>
                     <div class="card mb-3" v-if="!removed">
@@ -72,7 +72,7 @@
                         </div>
                         <div class="card-body">
                             <div class="text-monospace">
-                                <h3 class="h5 mb-3">Convert options</h3>
+                                <h3 class="h6 mb-3">Convert options</h3>
                                 @foreach($convert->options as $option)
                                     <p class="mb-1">
                                         {{ __(title_case($option->name)) }}:
