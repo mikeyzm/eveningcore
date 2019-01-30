@@ -20,7 +20,7 @@
                     <div class="form-group mb-4">
                         <label for="source">{{ __('Source Audio') }}</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="source" name="source" @change="onFileChange">
+                            <input type="file" class="custom-file-input" id="source" name="source" @change="onFileChange" accept="{{ $allowed_extensions }}">
                             <label class="custom-file-label" for="source" data-browse="{{ __('Browse') }}" v-text="filename"></label>
                         </div>
                     </div>

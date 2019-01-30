@@ -19,8 +19,11 @@ class ConvertController extends Controller
      */
     public function index()
     {
+        $allowed_extensions = collect(config('convert.allowed_extensions'))->map(function ($ext) {
+            return '.' . $ext;
+        })->implode(',');
         $converts = Convert::latest()->take(10)->get();
-        return view('home', compact('converts'));
+        return view('home', compact('converts', 'allowed_extensions'));
     }
 
     /**
