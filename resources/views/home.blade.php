@@ -47,7 +47,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button class="btn btn-primary">{{ __('Convert to Nightcore') }}</button>
+                    <p v-if="uploading">Uploading...please wait.</p>
+                    <button class="btn btn-primary" @click="uploading = true" :disabled="uploading">{{ __('Convert to Nightcore') }}</button>
                 </div>
             </form>
         </converter>

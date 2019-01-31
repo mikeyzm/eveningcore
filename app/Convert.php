@@ -35,7 +35,7 @@ class Convert extends Model
 
     function getOption($name)
     {
-        return optional($this->options->where('name', $name)->first())->value;
+        return optional($this->options->firstWhere('name', $name))->value;
     }
 
     function getUrlAttribute()

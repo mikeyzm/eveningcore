@@ -8,7 +8,8 @@
                     pitch: 1.3,
                     volume: 1.0,
                     sampleRate: false,
-                }
+                },
+                uploading: false,
             }
         },
         props: [
