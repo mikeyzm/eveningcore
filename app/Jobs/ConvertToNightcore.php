@@ -46,7 +46,7 @@ class ConvertToNightcore implements ShouldQueue
                 ->save('converts/' . $this->convert->file_name);
             // convert success
             $this->convert->status = ConvertStatus::Converted;
-            $this->convert->expired_at = now()->addHour();
+            $this->convert->expired_at = now()->addMinutes(config('convert.expire_time'));
             $this->convert->save();
         } catch (\Throwable $exception) {
             \Log::error($exception->getMessage());
