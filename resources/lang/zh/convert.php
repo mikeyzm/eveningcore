@@ -14,4 +14,5 @@ return [
     'status' => '状态',
     'options' => '转换选项',
     'download' => '下载',
+    'expired_at' => '过期时间',
 ];

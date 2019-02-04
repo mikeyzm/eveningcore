@@ -9,9 +9,10 @@ return [
     'pitch' => 'Pitch',
     'volume' => 'Volume',
     'convert_to_nightcore' => 'Convert to Nightcore',
-    'recent_converts' => 'Recent Converts',
+    'recent_converts' => 'Recent converts',
     'uploading' => 'Uploading...please wait.',
     'status' => 'Status',
     'options' => 'Options',
     'download' => 'Download',
+    'expired_at' => 'Expired at',
 ];
