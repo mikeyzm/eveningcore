@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <converter placeholder="{{ __('convert.choose_file') }}" inline-template>
-            <form method="post" action="{{ route('converts.store') }}" class="card mb-5" enctype="multipart/form-data">
+            <form method="post" action="{{ route('converts.store') }}" class="card mb-4" enctype="multipart/form-data">
                 @csrf
                 <div class="card-header">{{ __('convert.new_convert') }}</div>
                 <div class="card-body">
@@ -53,7 +53,7 @@
         </converter>
 
         @if($converts->isNotEmpty())
-            <h2 class="h5 mb-4">{{ __('convert.recent_converts') }}</h2>
+            <h2 class="h5 mb-4 font-weight-bold">{{ __('convert.recent_converts') }}</h2>
             @foreach($converts as $convert)
                 <convert :_convert="{{ $convert->toJson() }}" inline-template>
                     <div class="card mb-3" v-if="!removed">
