@@ -32,6 +32,6 @@ class AllowedExt implements Rule
      */
     public function message()
     {
-        return trans('validation.allowed_ext');
+        return trans('validation.mimes', ['values' => implode(',', $this->extensions)]);
     }
 }

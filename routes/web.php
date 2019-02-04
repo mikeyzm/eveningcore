@@ -10,7 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'ConvertController@index')->name('home');
-
-Route::resource('converts', 'ConvertController')->only('store');
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+], function () {
+    Route::get('/', 'ConvertController@index')->name('home');
+    Route::resource('converts', 'ConvertController')->only('store');
+});

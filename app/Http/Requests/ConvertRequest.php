@@ -21,4 +21,14 @@ class ConvertRequest extends FormRequest
             'options.volume' => ['required', 'numeric', 'between:0.1,2'],
         ];
     }
+
+    function attributes()
+    {
+        return [
+            'source' => __('convert.source'),
+            'tempo' => __('convert.tempo'),
+            'pitch' => __('convert.pitch'),
+            'volume' => __('convert.volume'),
+        ];
+    }
 }

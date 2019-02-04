@@ -1,4 +1,18 @@
 /**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+
+try {
+    window.Popper = require('popper.js').default;
+    window.$ = window.jQuery = require('jquery');
+
+    require('bootstrap');
+} catch (e) {
+}
+
+/**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
@@ -37,7 +51,24 @@ window.Echo = new Echo({
     host: window.location.hostname + ':8443'
 });
 
+/**
+ * day.js
+ */
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
+
+
+/**
+ * Font Awesome 5
+ */
+// import then needed Font Awesome functionality
+import {library, dom} from '@fortawesome/fontawesome-svg-core';
+// import icons
+import {faGlobe} from '@fortawesome/free-solid-svg-icons';
+import {faGithub} from '@fortawesome/free-brands-svg-icons';
+// add the imported icons to the library
+library.add(faGlobe, faGithub);
+// tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
+dom.watch();

@@ -2,59 +2,58 @@
 
 @section('content')
     <div class="container">
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <converter placeholder="{{ __('Choose file') }}" inline-template>
+        <converter placeholder="{{ __('convert.choose_file') }}" inline-template>
             <form method="post" action="{{ route('converts.store') }}" class="card mb-5" enctype="multipart/form-data">
                 @csrf
-                <div class="card-header">{{ __('New Convert') }}</div>
+                <div class="card-header">{{ __('convert.new_convert') }}</div>
                 <div class="card-body">
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="form-group mb-4">
-                        <label for="source">{{ __('Source Audio') }}</label>
+                        <label for="source">{{ __('convert.source') }}</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="source" name="source" @change="onFileChange" accept="{{ $allowed_extensions }}">
-                            <label class="custom-file-label" for="source" data-browse="{{ __('Browse') }}" v-text="filename"></label>
+                            <label class="custom-file-label" for="source" data-browse="{{ __('convert.browse') }}" v-text="filename"></label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="between-box" for="tempo">
-                            {{ __('Tempo') }}
+                            {{ __('convert.tempo') }}
                             <span>@{{ 'x' + options.tempo }}</span>
                         </label>
                         <input type="range" class="custom-range" min="1" max="2" step="0.01" id="tempo" name="options[tempo]" v-model="options.tempo">
                     </div>
                     <div class="form-group">
                         <label class="between-box" for="pitch">
-                            {{ __('Pitch') }}
+                            {{ __('convert.pitch') }}
                             <span>@{{ 'x' + options.pitch }}</span>
                         </label>
                         <input type="range" class="custom-range" min="1" max="2" step="0.01" id="pitch" name="options[pitch]" v-model="options.pitch">
                     </div>
                     <div class="form-group mb-0">
                         <label class="between-box" for="volume">
-                            {{ __('Volume') }}
+                            {{ __('convert.volume') }}
                             <span>@{{ 'x' + options.volume }}</span>
                         </label>
                         <input type="range" class="custom-range" min="0.1" max="2" step="0.01" id="volume" name="options[volume]" v-model="options.volume">
                     </div>
                 </div>
                 <div class="card-footer">
-                    <p v-if="uploading">Uploading...please wait.</p>
-                    <button class="btn btn-primary" @click="uploading = true" :disabled="uploading">{{ __('Convert to Nightcore') }}</button>
+                    <p v-if="uploading">{{ __('convert.uploading') }}</p>
+                    <button class="btn btn-primary" @click="uploading = true" :disabled="uploading">{{ __('convert.convert_to_nightcore') }}</button>
                 </div>
             </form>
         </converter>
 
-        @if($converts)
-            <h2 class="h5 mb-4">Last 10 converted audios</h2>
+        @if($converts->isNotEmpty())
+            <h2 class="h5 mb-4">{{ __('convert.recent_converts') }}</h2>
             @foreach($converts as $convert)
                 <convert :_convert="{{ $convert->toJson() }}" inline-template>
                     <div class="card mb-3" v-if="!removed">
@@ -63,20 +62,20 @@
                         </div>
                         <div class="list-group list-group-flush">
                             <div class="list-group-item between-box">
-                                Status
+                                {{ __('convert.status') }}
                                 <span :class="['badge', statusClass]" v-text="convert.status_desc"></span>
                             </div>
                             <div class="list-group-item between-box" v-if="convert.expired_at">
-                                {{ __('Expired at') }}
+                                {{ __('convert.expired_at') }}
                                 <time class="badge badge-light" v-text="expiredAt"></time>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="text-monospace">
-                                <h3 class="h6 mb-3">Convert options</h3>
+                                <h3 class="h6 mb-3">{{ __('convert.options') }}</h3>
                                 @foreach($convert->options as $option)
                                     <p class="mb-1">
-                                        {{ __(title_case($option->name)) }}:
+                                        {{ __('convert.' . $option->name) }}:
                                         @switch($option->name)
                                             @case('tempo')
                                             @case('pitch')
@@ -93,7 +92,7 @@
                         </div>
                         <div class="card-footer">
                             <a :href="convert.url" :download="convert.original_name" :class="['btn', 'btn-primary', {disabled: convert.status !== 2}]">
-                                {{ __('Download') }}
+                                {{ __('convert.download') }}
                             </a>
                         </div>
                     </div>

@@ -2,9 +2,10 @@
 
 namespace App\Enums;
 
+use BenSampo\Enum\Contracts\LocalizedEnum;
 use BenSampo\Enum\Enum;
 
-final class ConvertStatus extends Enum
+final class ConvertStatus extends Enum implements LocalizedEnum
 {
     const Pending = 0;
     const Converting = 1;
