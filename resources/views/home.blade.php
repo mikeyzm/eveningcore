@@ -19,8 +19,11 @@
                     <div class="form-group mb-4">
                         <label for="source">{{ __('convert.source') }}</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="source" name="source" @change="onFileChange" accept="{{ $allowed_extensions }}">
+                            <input type="file" class="custom-file-input" id="source" name="source" @change="onFileChange" accept="{{ $allowed_exts }}" aria-describedby="sourceHelpBlock">
                             <label class="custom-file-label" for="source" data-browse="{{ __('convert.browse') }}" v-text="filename"></label>
+                            <small id="sourceHelpBlock" class="form-text text-muted">
+                                {{ __('convert.source_help', ['allowed_exts' => $allowed_exts, 'expire_time' => config('convert.expire_time')]) }}
+                            </small>
                         </div>
                     </div>
                     <div class="form-group">
@@ -98,6 +101,7 @@
                     </div>
                 </convert>
             @endforeach
+            {{ $converts->links() }}
         @endif
     </div>
 @endsection

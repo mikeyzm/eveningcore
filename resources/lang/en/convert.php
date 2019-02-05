@@ -15,4 +15,5 @@ return [
     'options' => 'Options',
     'download' => 'Download',
     'expired_at' => 'Expired at',
+    'source_help' => 'Allowed extensions: :allowed_exts. Source file will be automatically deleted after :expire_time minutes.',
 ];

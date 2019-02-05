@@ -15,4 +15,5 @@ return [
     'options' => '转换选项',
     'download' => '下载',
     'expired_at' => '过期时间',
+    'source_help' => '文件类型要求：:allowed_exts，转换完成后将在 :expire_time 分钟后自动删除。',
 ];

@@ -21,12 +21,13 @@ class ConvertController extends Controller
     {
         \SEOMeta::setTitle(__('seo.subtitle'));
         \SEOMeta::setDescription(__('seo.description'));
+        \OpenGraph::addImage(asset('apple-touch-icon.png'));
 
-        $allowed_extensions = collect(config('convert.allowed_extensions'))->map(function ($ext) {
+        $allowed_exts = collect(config('convert.allowed_extensions'))->map(function ($ext) {
             return '.' . $ext;
         })->implode(',');
-        $converts = Convert::latest()->take(10)->get();
-        return view('home', compact('converts', 'allowed_extensions'));
+        $converts = Convert::where('status', '!=', ConvertStatus::Expired)->paginate(config('convert.per_page'));
+        return view('home', compact('converts', 'allowed_exts'));
     }
 
     /**

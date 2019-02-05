@@ -35,7 +35,6 @@ return [
             'type' => false,
             'site_name' => false,
             'images' => [
-                asset('apple-touch-icon.png'),
             ],
         ],
     ],
