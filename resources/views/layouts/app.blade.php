@@ -24,7 +24,8 @@
     <nav class="navbar navbar-expand navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                {{ config('app.name') }}
+                <img src="{{ asset('favicon-32x32.png') }}" style="height: 24px;" alt="{{ config('app.name') }}">
+                <span class="text-monospace font-weight-bold" style="color: #E91E63;">{{ config('app.name') }}</span>
             </a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
