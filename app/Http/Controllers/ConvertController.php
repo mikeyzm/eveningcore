@@ -26,7 +26,9 @@ class ConvertController extends Controller
         $allowed_exts = collect(config('convert.allowed_extensions'))->map(function ($ext) {
             return '.' . $ext;
         })->implode(',');
-        $converts = Convert::where('status', '!=', ConvertStatus::Expired)->paginate(config('convert.per_page'));
+        $converts = Convert::where('created_at', '>=', now()->subDays(config('convert.range_days')))
+            ->latest()
+            ->paginate(config('convert.per_page'));
         return view('home', compact('converts', 'allowed_exts'));
     }
 

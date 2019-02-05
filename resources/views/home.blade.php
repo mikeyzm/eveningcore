@@ -75,7 +75,7 @@
                         </div>
                         <div class="card-body">
                             <div class="text-monospace">
-                                <h3 class="h6 mb-3">{{ __('convert.options') }}</h3>
+                                <h3 class="h6 mb-3">#{{ $convert->id }} {{ __('convert.options') }}</h3>
                                 @foreach($convert->options as $option)
                                     <p class="mb-1">
                                         {{ __('convert.' . $option->name) }}:

@@ -11,4 +11,6 @@ return [
     'expire_time' => \Carbon\Carbon::MINUTES_PER_HOUR * \Carbon\Carbon::HOURS_PER_DAY,
 
     'per_page' => 10,
+
+    'range_days' => 3,
 ];
