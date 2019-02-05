@@ -7,9 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
-    <meta name="description" content="Nightcore the song!">
-    <meta name="Keywords" content="nightcore,eveningcore,nightcore maker,nightcore converter">
+    {!! SEO::generate() !!}
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>

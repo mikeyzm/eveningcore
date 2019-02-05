@@ -19,6 +19,9 @@ class ConvertController extends Controller
      */
     public function index()
     {
+        \SEOMeta::setTitle(__('seo.subtitle'));
+        \SEOMeta::setDescription(__('seo.description'));
+
         $allowed_extensions = collect(config('convert.allowed_extensions'))->map(function ($ext) {
             return '.' . $ext;
         })->implode(',');
