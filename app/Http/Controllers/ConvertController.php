@@ -21,6 +21,7 @@ class ConvertController extends Controller
     {
         \SEOMeta::setTitle(__('seo.subtitle'));
         \SEOMeta::setDescription(__('seo.description'));
+        \OpenGraph::setDescription(__('seo.description'));
         \OpenGraph::addImage(asset('apple-touch-icon.png'));
 
         $allowed_exts = collect(config('convert.allowed_extensions'))->map(function ($ext) {
