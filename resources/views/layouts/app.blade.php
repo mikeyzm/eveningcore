@@ -9,6 +9,10 @@
 
     {!! SEO::generate() !!}
 
+    @foreach($locales as $locale => $lang)
+        <link rel="alternate" hreflang="{{ $locale }}" href="{{ LaravelLocalization::getLocalizedURL($locale) }}">
+    @endforeach
+
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
@@ -38,8 +42,14 @@
                         <i class="fas fa-globe fa-fw"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="i18nDropdown">
-                        @foreach(LaravelLocalization::getLocalesOrder() as $locale => $lang)
-                            <a class="dropdown-item {{ LaravelLocalization::getCurrentLocale() === $locale ? 'active' : '' }}" href="{{ LaravelLocalization::getLocalizedURL($locale) }}">{{ $lang['native'] }}</a>
+                        @foreach($locales as $locale => $lang)
+                            <a class="dropdown-item {{ LaravelLocalization::getCurrentLocale() === $locale ? 'active' : '' }}"
+                               href="{{ LaravelLocalization::getLocalizedURL($locale) }}"
+                               rel="alternate"
+                               hreflang="{{ $locale }}"
+                            >
+                                {{ $lang['native'] }}
+                            </a>
                         @endforeach
                     </div>
                 </li>

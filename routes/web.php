@@ -12,7 +12,6 @@
 */
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
 ], function () {
     Route::get('/', 'ConvertController@index')->name('home');
     Route::resource('converts', 'ConvertController')->only('store');

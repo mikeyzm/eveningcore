@@ -30,7 +30,10 @@ class ConvertController extends Controller
         $converts = Convert::where('created_at', '>=', now()->subDays(config('convert.range_days')))
             ->latest()
             ->paginate(config('convert.per_page'));
-        return view('home', compact('converts', 'allowed_exts'));
+
+        $locales = \LaravelLocalization::getLocalesOrder();
+
+        return view('home', compact('converts', 'allowed_exts', 'locales'));
     }
 
     /**
